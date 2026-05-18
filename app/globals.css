@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-sky-blue: #6CABDD;
+  --color-sky-blue-dark: #5B9BC4;
+  --color-navy: #1C2C5B;
+  --color-navy-dark: #152244;
+  --color-gold: #FFCE1F;
+  --color-gold-dark: #E6BA1B;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
