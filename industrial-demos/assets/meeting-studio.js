@@ -49,7 +49,7 @@ function showProfile(){
  $("focus").innerHTML=p.focus.map(f=>'<div class="focus-card"><strong>'+safe(f[0])+'</strong><p>'+safe(f[1])+'</p></div>').join("");
  $("questions").innerHTML=p.questions.map(q=>"<li>"+safe(q)+"</li>").join("");
  $("demoPitch").textContent=p.pitch;
- $("demoLinks").innerHTML=p.demos.map(([title,view])=>'<a class="action-link'+(view===p.demos[0][1]?'':' alt')+'" href="./index.html?view='+encodeURIComponent(view)+'" target="_blank" rel="noopener">'+safe(title)+' ↗</a>').join("");
+ $("demoLinks").innerHTML=p.demos.map(([title,view])=>'<a class="action-link'+(view===p.demos[0][1]?'':' alt')+'" href="./index.html?view='+encodeURIComponent(view)+'&profile='+encodeURIComponent(current)+'" target="_blank" rel="noopener">'+safe(title)+' ↗</a>').join("");
 }
 $("company").addEventListener("change",e=>{saveNotes();current=e.target.value;showProfile();restoreNotes()});
 keys.forEach(k=>$(k).addEventListener("input",saveNotes));
