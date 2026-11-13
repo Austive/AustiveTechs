@@ -60,3 +60,29 @@ Do not publish prospect contact lists, private pricing, personal details, custom
 ## Project
 
 Austive Technologies — https://www.austivetechs.co.za
+
+## November 16–17: meeting preparation studio
+
+Open `industrial-demos/meeting-studio.html` first. It contains **provisional** discovery profiles for ND Engineering, United Distribution & Transport Services, and Raubex KZN, plus a generic profile for a different confirmed attendee.
+
+- Choose the company profile; verify the actual organisation at the appointment.
+- Read the published business background and the questions for the relevant workflow.
+- Take high-level non-confidential notes using the worksheet. Export the notes before leaving the device.
+- Open the linked demo only after confirming that the topic relates to the prospect's real process.
+- Ask for the owner, measurable baseline, existing systems, decision process and an agreed next action.
+
+**Meeting schedule:** Monday 16 November and Tuesday 17 November 2026; one meeting Monday and two Tuesday. Attendees are not confirmed in source context, so the three named profiles are interchangeable examples, not assertions about those appointments.
+
+### Source verification for the provisional profiles
+
+- ND Engineering: https://www.ndengineering.co.za/
+- United Distribution & Transport Services: https://www.unitedtransport.co.za (corporate website referenced by company's business profile; verify contact details directly)
+- Raubex KZN: https://raubex.com/roads-and-earthworks/
+
+### Storage and privacy
+
+Meeting notes are stored in localStorage under each profile, never sent from the app. Clear notes after exporting to an approved private business location. Do not record customer secrets, identifiable personal data or sensitive operational detail in a public or shared browser. GitHub repository remains public; don't commit personal contact lists or prospect-confidential notes.
+
+### CI
+
+The workflow at `.github/workflows/industrial-demos.yml` runs syntax checks and rules assertions on matching pushes and pull requests. GitHub workflow status is separate from manual acceptance of the rendered page.
