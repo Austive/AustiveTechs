@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Industrial Discovery Meetings | Austive Technologies</title><link rel="stylesheet" href="./assets/app.css">
+<style>
+.meeting-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(290px,1fr);gap:20px}.meeting-layout .panel{margin-bottom:20px}.meeting-lead{color:#64778c;font-size:13px}.focus-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.focus-card{border:1px solid #e2e8f0;border-radius:12px;padding:14px;background:#f8fafc}.focus-card strong{display:block;font-size:12px;margin-bottom:5px}.focus-card p{margin:0;font-size:11px;color:#61738a}.company-choice{padding:13px;border:1px solid #cfd9e5;border-radius:10px;width:100%;font-weight:700;background:white;color:#0e263e}.source{margin-top:12px;font-size:12px;color:#66788c}.source a{color:#205c9a}.q-list{padding-left:19px;color:#31485f}.q-list li{margin-bottom:11px}.action-link{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#fff;background:#102d49;border-radius:9px;padding:12px 16px;font-weight:700;margin:6px 8px 6px 0;font-size:12px}.action-link:hover{background:#245677}.action-link.alt{color:#133451;background:#edf5fb}.note-fields{display:grid;gap:11px}.note-fields label{font-weight:700;font-size:12px;color:#394e62}.note-fields input,.note-fields textarea,.note-fields select{margin-top:5px;width:100%;border:1px solid #cfdae5;border-radius:8px;padding:10px;color:#1d344c;background:#fff;font:inherit}.note-fields textarea{min-height:85px;resize:vertical}.note-fields .checkline{display:flex;gap:8px;align-items:center}.note-fields .checkline input{width:auto;margin:0}.note-notice{color:#735416;background:#fff9e6;border:1px solid #f2dda7;padding:12px;border-radius:9px;font-size:12px;margin:12px 0}.script{padding:17px;border-left:3px solid #0c887e;background:#f3faf8;border-radius:0 9px 9px 0;color:#1d4654;font-size:13px}.script p{margin:6px 0}.flow-steps{display:flex;flex-wrap:wrap;gap:8px}.flow-steps span{background:#f0f5fa;border-radius:20px;padding:7px 11px;font-size:11px;font-weight:700;color:#355273}.note-actions{display:flex;gap:10px;flex-wrap:wrap}.toplink{display:inline-block;margin-bottom:15px;color:#3b668c;text-decoration:none;font-size:12px}@media(max-width:950px){.meeting-layout{grid-template-columns:1fr}.focus-cards{grid-template-columns:1fr}}
+</style></head><body><div class="shell"><aside class="sidebar">
+<a class="brand" href="./"><span class="mark">A</span><span>AUSTIVE <b>TECHNOLOGIES</b><small>MEETING STUDIO</small></span></a>
+<div class="nav-label">CLIENT DISCOVERY</div><nav><a class="nav active" href="./meeting-studio.html">◉ &nbsp; Meeting preparation</a><a class="nav" href="./index.html">◫ &nbsp; Interactive demos</a></nav>
+<div class="side-bottom"><div class="synthetic">● PROSPECT RESEARCH</div><p>Company facts are public-source background. All example records in the demonstrations are synthetic.</p><a href="https://www.austivetechs.co.za">Austive Technologies ↗</a></div></aside>
+<div class="main"><header class="top"><div><span class="eyebrow" style="color:#0c887e">NOVEMBER 16–17, 2026 / DISCOVERY MEETINGS</span><h1>Meeting preparation studio</h1><p>Understand operations first. Demo the relevant workflow. Agree the next decision.</p></div><span class="demo-pill">INTERNAL SALES TOOL</span></header>
+<div class="notice"><b>Confidentiality:</b> Do not record personal details, passwords, sensitive contracts or proprietary processes in this browser. Notes are stored in this browser only and are not transmitted to Austive or GitHub. Avoid recording information without the prospect's permission.</div>
+<div class="meeting-layout"><div>
+<section class="panel"><div class="panel-head"><div><h2>1. Select the company profile</h2><p>Three provisional profiles, plus a flexible option</p></div></div><label for="company" class="sr-only">Company profile</label><select id="company" class="company-choice">
+<option value="nd">ND Engineering — steel fabrication</option>
+<option value="united">United Transport — logistics</option>
+<option value="raubex">Raubex KZN — roads & asphalt</option>
+<option value="other">Another company — discovery first</option></select>
+<p class="source" id="source"></p></section>
+<section class="panel"><div class="panel-head"><div><h2>2. Business and operational context</h2><p>Published capabilities vs questions worth asking</p></div></div><p class="meeting-lead" id="context"></p><div class="focus-cards" id="focus"></div></section>
+<section class="panel"><div class="panel-head"><div><h2>3. Ask before showing software</h2><p>Choose their priorities from the conversation</p></div></div><ol class="q-list" id="questions"></ol></section>
+<section class="panel"><div class="panel-head"><div><h2>4. Demonstrate only what is relevant</h2><p>The three live demos use fictional records and transparent rules</p></div></div><p id="demoPitch" class="script"></p><div id="demoLinks"></div><div class="flow-steps"><span>Discover</span><span>Clarify baseline</span><span>Show example</span><span>Ask for feedback</span><span>Agree next action</span></div></section>
+<section class="panel"><h2>Suggested closing question</h2><div class="script"><p>“If we focused on just one workflow worth improving, which would you choose, who would own it, and what result would make a small pilot worthwhile?”</p></div><p class="meeting-lead">Do not promise delivery dates, performance gains, integrations or pricing without a scoped assessment.</p></section>
+</div><div><section class="panel">
+<div class="panel-head"><div><h2>Meeting worksheet</h2><p>Use neutral notes without private customer information</p></div></div>
+<div class="note-fields">
+<label>Meeting day<select id="day"><option value="Monday 16 Nov 2026">Monday 16 Nov 2026</option><option value="Tuesday 17 Nov 2026">Tuesday 17 Nov 2026</option><option value="Another day">Another day</option></select></label>
+<label>Meeting time / reference<input id="time" placeholder="e.g. 10:00 — first appointment"></label>
+<label>Company name (if different)<input id="actualCompany" placeholder="Confirmed company name"></label>
+<label>Attendee role (no names needed)<input id="role" placeholder="e.g. operations manager"></label>
+<label>Current workflow / tools<textarea id="workflow" placeholder="Only non-confidential observations"></textarea></label>
+<label>Problem stated by prospect<textarea id="problem" placeholder="Record their wording; do not assume a problem"></textarea></label>
+<label>Impact / baseline<textarea id="impact" placeholder="Time, completeness, reporting frequency; only verified figures"></textarea></label>
+<label>Future plans / priorities<textarea id="strategy" placeholder="What they voluntarily shared"></textarea></label>
+<label>Existing software / integrations<textarea id="systems" placeholder="High-level only. No credentials or system diagrams."></textarea></label>
+<label>Decision process / budget status<textarea id="decision" placeholder="Known, unknown or pending confirmation"></textarea></label>
+<label>Potential paid pilot<textarea id="pilot" placeholder="One bounded improvement, if requested"></textarea></label>
+<label>Agreed next action and date<textarea id="next" placeholder="Who will follow up and when?"></textarea></label>
+</div><div class="note-notice">These notes stay in local browser storage until cleared. They do not sync between devices. Export a copy before switching computers.</div>
+<div class="note-actions"><button id="download" class="btn" type="button">Download meeting notes</button><button id="clear" class="btn secondary" type="button">Clear this profile's notes</button></div>
+</section></div></div>
+<footer>© Austive Technologies · Discovery-stage software concepts · Not affiliated with the profiled organisations</footer>
+</div></div>
+<script src="./assets/meeting-studio.js"></script></body></html>
