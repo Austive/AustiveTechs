@@ -20,6 +20,27 @@ const sample={
  {id:'TR-303',vehicle:'VH-09',route:'Mill → Warehouse',capacity:32,load:25,plannedArrival:iso(1)+'T15:00',actualArrival:'',status:'In transit'},
  {id:'TR-304',vehicle:'VH-21',route:'Yard → Depot C',capacity:22,load:24,plannedArrival:iso(1)+'T11:00',actualArrival:'',status:'Planned'}
  ]};
+// Synthetic prospect-specific scenarios. These are illustrative fictional records, not customer data.
+const profileParam=new URLSearchParams(window.location.search).get('profile');
+const profile=['nd','united','raubex'].includes(profileParam)?profileParam:null;
+const profileLabels={nd:'Fabrication workshop illustration',united:'Distribution dispatch illustration',raubex:'Road surfacing production illustration'};
+const scenarios={
+nd:{maintenance:[
+{id:'FAB-401',asset:'Workshop overhead hoist',due:iso(6),runningHours:960,serviceAtHours:1000,criticality:3,status:'Open'},
+{id:'FAB-402',asset:'Fabrication compressor',due:iso(-1),runningHours:1080,serviceAtHours:1050,criticality:2,status:'Open'},
+{id:'FAB-403',asset:'Welding bay power unit',due:iso(15),runningHours:380,serviceAtHours:500,criticality:2,status:'In progress'}
+]},
+united:{fleet:[
+{id:'DIST-501',vehicle:'FLEET-12',route:'Keystone depot → Retail DC',capacity:24,load:20,plannedArrival:iso(-1)+'T11:00',actualArrival:iso(-1)+'T10:45',status:'Delivered'},
+{id:'DIST-502',vehicle:'FLEET-18',route:'Port → Warehouse',capacity:28,load:25,plannedArrival:iso(-1)+'T15:00',actualArrival:iso(-1)+'T16:40',status:'Delivered'},
+{id:'DIST-503',vehicle:'FLEET-08',route:'Warehouse → Distribution hub',capacity:20,load:18,plannedArrival:iso(1)+'T13:00',actualArrival:'',status:'In transit'}
+]},
+raubex:{production:[
+{id:'ROAD-601',date:iso(-2),shift:'Roadworks early',planned:180,actual:170,rejected:5,dispatched:162},
+{id:'ROAD-602',date:iso(-1),shift:'Surfacing late',planned:145,actual:151,rejected:3,dispatched:140},
+{id:'ROAD-603',date:iso(0),shift:'Rehabilitation early',planned:165,actual:160,rejected:4,dispatched:154}
+]}}
+;
 const configs={
  production:{name:'Production & dispatch',intro:'Monitor shift plans, output quality, and dispatch reconciliation across sample shifts.',chart:'Planned vs actual production',sub:'Tonnes per shift · fictional operating records',table:'Production shift records',
  fields:[['id','Shift reference','text'],['date','Shift date','date'],['shift','Shift name','text'],['planned','Planned production (t)','number'],['actual','Actual production (t)','number'],['rejected','Rejected output (t)','number'],['dispatched','Dispatched output (t)','number']],
@@ -36,8 +57,8 @@ const configs={
 };
 let view='production', rows=[], editIndex=null;
 function clone(x){return JSON.parse(JSON.stringify(x))}
-function storeKey(){return 'austive-industrial-lab-v1-'+view}
-function load(){try{const data=JSON.parse(localStorage.getItem(storeKey()));return Array.isArray(data)?data:clone(sample[view])}catch(_){return clone(sample[view])}}
+function storeKey(){return 'austive-industrial-lab-v2-'+(profile||'generic')+'-'+view}
+function load(){try{const data=JSON.parse(localStorage.getItem(storeKey()));return Array.isArray(data)?data:clone((scenarios[profile]&&scenarios[profile][view])||sample[view])}catch(_){return clone((scenarios[profile]&&scenarios[profile][view])||sample[view])}}
 function persist(){try{localStorage.setItem(storeKey(),JSON.stringify(rows))}catch(_){/* available without persistence */}}
 function num(v){return Number(v)||0}
 function round(v){return R.round(v,1)}
@@ -79,7 +100,7 @@ function render(){
  $('tbody').innerHTML=visible.length?visible.map(({record,i})=>'<tr>'+cfg.cols.map(([,key])=>{const val=record[key];const isStatus=key==='review';const tone=/overdue|capacity review|reconcile|late|priority|below plan|exception/i.test(String(val))?' danger':/scheduled|in transit/i.test(String(val))?' warn':'';return '<td>'+(isStatus?'<span class="chip'+tone+'">'+escapeHTML(fmt(val))+'</span>':escapeHTML(fmt(val)))+'</td>'}).join('')+'<td><button type="button" class="edit" data-edit="'+i+'">Edit</button></td></tr>').join(''):'<tr><td colspan="'+(cfg.cols.length+1)+'">No matching records</td></tr>';
  $('count').textContent=visible.length+' of '+rows.length+' records';
 }
-function choose(name){view=name;rows=load();const c=configs[view];$('title').textContent=c.name;$('subtitle').textContent=c.intro;$('chartTitle').textContent=c.chart;$('chartDesc').textContent=c.sub;$('tableTitle').textContent=c.table;$('methodology').textContent=c.method;$('search').value='';document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view))});render()}
+function choose(name){view=name;rows=load();const c=configs[view];$('title').textContent=c.name;$('subtitle').textContent=(profile?profileLabels[profile]+' · ':'')+c.intro;$('chartTitle').textContent=c.chart;$('chartDesc').textContent=c.sub;$('tableTitle').textContent=c.table;$('methodology').textContent=c.method;$('search').value='';document.querySelectorAll('[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view);b.setAttribute('aria-pressed',String(b.dataset.view===view))});render()}
 function openEditor(i){editIndex=i;const c=configs[view],source=i===null?null:rows[i];$('dialogTitle').textContent=i===null?'New '+view+' record':'Edit '+source.id;$('formError').textContent='';
  $('fields').innerHTML=c.fields.map(([key,label,type,options])=>'<label>'+escapeHTML(label)+(type==='select'?'<select name="'+escapeHTML(key)+'">'+options.map(o=>'<option value="'+escapeHTML(o)+'" '+(source&&source[key]===o?'selected':'')+'>'+escapeHTML(o)+'</option>').join('')+'</select>':'<input name="'+escapeHTML(key)+'" type="'+type+'" '+(type==='number'?'step="any" min="0"':'')+' '+(key==='actualArrival'?'':'required')+' value="'+escapeHTML(source?source[key]:type==='date'?iso():type==='datetime-local'?'':'')+'">')+'</label>').join('');$('editor').showModal()}
 $('recordForm').addEventListener('submit',e=>{e.preventDefault();const cfg=configs[view],data=new FormData(e.currentTarget),record={};for(const [key,,type] of cfg.fields){const v=String(data.get(key)||'').trim();if(!v&&key!=='actualArrival'){$('formError').textContent='Complete all required fields.';return}record[key]=type==='number'?Number(v):v;if(type==='number'&&(!Number.isFinite(record[key])||record[key]<0)){$('formError').textContent='Numeric fields must be non-negative numbers.';return}}
@@ -92,7 +113,7 @@ $('recordForm').addEventListener('submit',e=>{e.preventDefault();const cfg=confi
 $('close').addEventListener('click',()=>$('editor').close());$('cancel').addEventListener('click',()=>$('editor').close());
 $('add').addEventListener('click',()=>openEditor(null));$('tbody').addEventListener('click',e=>{const b=e.target.closest('[data-edit]');if(b)openEditor(Number(b.dataset.edit))});
 $('search').addEventListener('input',render);document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.view)));
-$('reset').addEventListener('click',()=>{if(!confirm('Restore fictional sample records for this demonstration?'))return;rows=clone(sample[view]);persist();$('search').value='';render()});
+$('reset').addEventListener('click',()=>{if(!confirm('Restore fictional sample records for this demonstration?'))return;rows=clone((scenarios[profile]&&scenarios[profile][view])||sample[view]);persist();$('search').value='';render()});
 $('export').addEventListener('click',()=>{const cfg=configs[view],keys=cfg.fields.map(f=>f[0]);const csv=[keys,...rows.map(r=>keys.map(k=>r[k]))].map(row=>row.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='austive-'+view+'-synthetic-demo.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)});
 $('year').textContent=new Date().getFullYear();choose(['production','maintenance','fleet'].includes(new URLSearchParams(window.location.search).get('view'))?new URLSearchParams(window.location.search).get('view'):'production');
 })();
