@@ -94,5 +94,5 @@ $('add').addEventListener('click',()=>openEditor(null));$('tbody').addEventListe
 $('search').addEventListener('input',render);document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.view)));
 $('reset').addEventListener('click',()=>{if(!confirm('Restore fictional sample records for this demonstration?'))return;rows=clone(sample[view]);persist();$('search').value='';render()});
 $('export').addEventListener('click',()=>{const cfg=configs[view],keys=cfg.fields.map(f=>f[0]);const csv=[keys,...rows.map(r=>keys.map(k=>r[k]))].map(row=>row.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='austive-'+view+'-synthetic-demo.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)});
-$('year').textContent=new Date().getFullYear();choose('production');
+$('year').textContent=new Date().getFullYear();choose(['production','maintenance','fleet'].includes(new URLSearchParams(window.location.search).get('view'))?new URLSearchParams(window.location.search).get('view'):'production');
 })();
