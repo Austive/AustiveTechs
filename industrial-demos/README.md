@@ -61,28 +61,27 @@ Do not publish prospect contact lists, private pricing, personal details, custom
 
 Austive Technologies — https://www.austivetechs.co.za
 
-## November 16–17: meeting preparation studio
+## Confirmed prospect meeting profiles (16–17 November 2026)
 
-Open `industrial-demos/meeting-studio.html` first. It contains **provisional** discovery profiles for ND Engineering, United Distribution & Transport Services, and Raubex KZN, plus a generic profile for a different confirmed attendee.
+The confirmed organisations are **National Asphalt**, **NPC Sterkspruit** (verify whether the contact means Natal Portland Cement's Sterkspruit plant), and **Raubex**. The distribution of appointments across Monday and Tuesday remains unknown.
 
-- Choose the company profile; verify the actual organisation at the appointment.
-- Read the published business background and the questions for the relevant workflow.
-- Take high-level non-confidential notes using the worksheet. Export the notes before leaving the device.
-- Open the linked demo only after confirming that the topic relates to the prospect's real process.
-- Ask for the owner, measurable baseline, existing systems, decision process and an agreed next action.
+Open `industrial-demos/meeting-studio.html` and select a profile. Research-derived discovery prompts and matched synthetic samples are linked.
 
-**Meeting schedule:** Monday 16 November and Tuesday 17 November 2026; one meeting Monday and two Tuesday. Attendees are not confirmed in source context, so the three named profiles are interchangeable examples, not assertions about those appointments.
+| Profile | First demo | Secondary demo | Critical discovery boundaries |
+| --- | --- | --- | --- |
+| National Asphalt | `?view=production&profile=national` | `?view=maintenance&profile=national` | Do not imply mix-design compliance, quality assurance, plant-control or inventory balancing |
+| NPC Sterkspruit | `?view=production&profile=npc` | `?view=fleet&profile=npc` | Sample tonnes are a generic illustrative ledger, **not** concrete recipes, batching logic or cement quality controls |
+| Raubex KZN | `?view=production&profile=raubex` | `?view=maintenance&profile=raubex` | Do not imply that illustrative roadwork shift volumes capture actual project accounting or asset safety checks |
 
-### Source verification for the provisional profiles
+**Source starting points:**
+- https://nationalasphalt.co.za/
+- https://npc.co.za/our-plants-page/
+- https://raubex.com/roads-and-earthworks/
 
-- ND Engineering: https://www.ndengineering.co.za/
-- United Distribution & Transport Services: https://www.unitedtransport.co.za (corporate website referenced by company's business profile; verify contact details directly)
-- Raubex KZN: https://raubex.com/roads-and-earthworks/
+Both National Asphalt and Raubex KZN are linked to the Raubex Group; confirm separate site-level process owners and vendor/procurement approval routes.
 
-### Storage and privacy
+**Meeting approach:** introduce Austive Technologies, ask how current systems already work, identify any validated bottleneck, then demonstrate only an appropriate example. Note business goals, operational constraints, measures of improvement and agreed next steps without recording confidential customer data. No pilot implementation or integration without written authorisation.
 
-Meeting notes are stored in localStorage under each profile, never sent from the app. Clear notes after exporting to an approved private business location. Do not record customer secrets, identifiable personal data or sensitive operational detail in a public or shared browser. GitHub repository remains public; don't commit personal contact lists or prospect-confidential notes.
+**Privacy:** The meeting studio stores notes locally in the browser; they are not sent to a server. Export notes to an approved private company location and clear them from shared devices. Never commit meeting notes or contact lists to this public repository.
 
-### CI
-
-The workflow at `.github/workflows/industrial-demos.yml` runs syntax checks and rules assertions on matching pushes and pull requests. GitHub workflow status is separate from manual acceptance of the rendered page.
+**QA:** `.github/workflows/industrial-demos.yml` runs JavaScript syntax checks and unit tests. Manually verify desktop/mobile presentation and offline availability before customer meetings. The live austivetechs.co.za website remains unchanged.
