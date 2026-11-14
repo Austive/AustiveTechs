@@ -36,7 +36,7 @@ other:{
 }};
 const keys=["day","time","actualCompany","role","workflow","problem","impact","strategy","systems","decision","pilot","next"];
 const safe=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let current="nd";
+let current="national";
 const key=()=> "austive-meeting-notes-v2-"+current;
 function noteData(){const data={};keys.forEach(k=>data[k]=$(k).value);return data}
 function readNotes(){try{return JSON.parse(localStorage.getItem(key())||"{}")}catch(_){return {}}}
