@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industrial Operations Lab | Austive Technologies</title><meta name="description" content="Interactive industrial operations demonstrations with synthetic data by Austive Technologies.">
+<link rel="stylesheet" href="./assets/app.css"></head>
+<body><div class="shell">
+<aside class="sidebar">
+<a class="brand" href="../"><span class="mark">A</span><span>AUSTIVE <b>TECHNOLOGIES</b><small>INDUSTRIAL SOLUTIONS LAB</small></span></a>
+<div class="nav-label">DEMONSTRATIONS</div>
+<nav aria-label="Demo navigation"><button class="nav active" data-view="production"><span>◫</span> Production &amp; dispatch</button><button class="nav" data-view="maintenance"><span>⚙</span> Asset maintenance</button><button class="nav" data-view="fleet"><span>▤</span> Fleet intelligence</button></nav>
+<div class="side-bottom"><div class="synthetic">● SYNTHETIC DATA ONLY</div><p>Illustrative business calculations, not live factory, mining, fleet or safety-control software.</p><a href="https://www.austivetechs.co.za/">Austive Technologies ↗</a></div>
+</aside>
+<div class="main">
+<header class="top"><div><span class="eyebrow">OPERATIONS INTELLIGENCE / PROOF OF CONCEPT</span><h1 id="title">Production &amp; dispatch</h1><p id="subtitle">Monitor plans, output quality, and dispatch reconciliation across sample shifts.</p></div><div class="top-actions"><span class="demo-pill">DEMO ENVIRONMENT</span><a class="btn secondary" style="text-decoration:none" href="./meeting-studio.html">Meeting studio ↗</a><button id="reset" class="btn secondary" type="button">Reset sample data</button><button id="export" class="btn" type="button">Export CSV</button></div></header>
+<div class="notice"><b>Independent concept demonstration.</b> No affiliation, integration or operational data from any of the 12 researched companies. Calculation policies and thresholds must be validated with a prospective customer's process owner.</div>
+<main><section class="metrics" id="metrics" aria-label="Calculated KPIs"></section>
+<section class="two-col"><div class="panel chart-panel"><div class="panel-head"><div><h2 id="chartTitle">Shift output vs plan</h2><p id="chartDesc">Illustrative volume comparison</p></div><span class="tag">Calculated live</span></div><div id="chart" class="bars" role="img" aria-label="Comparative bar chart"></div></div>
+<div class="panel insights"><div class="panel-head"><div><h2>Operational review</h2><p>Rules-based exception flags</p></div></div><div id="insights"></div></div></section>
+<section class="panel data-panel"><div class="panel-head panel-tools"><div><h2 id="tableTitle">Shift records</h2><p>Editable working examples retained in this browser only</p></div><div class="toolrow"><label class="search-label"><span class="sr-only">Search records</span><input id="search" type="search" placeholder="Search records…"></label><button id="add" class="btn" type="button">+ New record</button></div></div><div class="table-scroller"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div><div class="table-footer"><span id="count"></span><small>Click Edit to adjust a record. Data persists locally until reset.</small></div></section>
+<section class="method"><div><h2>How this demonstration calculates results</h2><p id="methodology"></p></div><div class="assumptions"><h3>Before a customer pilot</h3><p>Confirm operational definitions, units, tolerances, workflows, integrations, ownership, permissions and acceptance criteria. This demonstration never writes to plant equipment or live fleet systems.</p></div></section>
+</main><footer>© <span id="year"></span> Austive Technologies · <a href="https://www.austivetechs.co.za/">www.austivetechs.co.za</a> · Illustrative data / no third-party affiliation</footer></div></div>
+<dialog id="editor"><form id="recordForm"><div class="dialog-top"><div><span class="eyebrow">DEMO RECORD</span><h2 id="dialogTitle">New record</h2></div><button type="button" id="close" class="icon-btn" aria-label="Close dialog">×</button></div><div class="form-fields" id="fields"></div><p class="form-error" id="formError" role="alert"></p><div class="dialog-actions"><button type="button" id="cancel" class="btn secondary">Cancel</button><button class="btn" type="submit">Save record</button></div></form></dialog>
+<script src="./assets/rules.js"></script><script src="./assets/app.js"></script></body></html>

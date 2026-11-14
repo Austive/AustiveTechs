@@ -1,0 +1,26 @@
+name: Industrial demos checks
+on:
+  pull_request:
+    paths:
+      - 'industrial-demos/**'
+      - '.github/workflows/industrial-demos.yml'
+  push:
+    branches:
+      - feature/industrial-operations-demo-suite
+    paths:
+      - 'industrial-demos/**'
+      - '.github/workflows/industrial-demos.yml'
+jobs:
+  business-rules:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check industrial-demos/assets/rules.js
+          node --check industrial-demos/assets/app.js
+          node --check industrial-demos/assets/meeting-studio.js
+      - name: Test transparent business rules
+        run: node industrial-demos/tests/rules.test.js
