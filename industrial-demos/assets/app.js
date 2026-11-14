@@ -21,24 +21,40 @@ const sample={
  {id:'TR-304',vehicle:'VH-21',route:'Yard → Depot C',capacity:22,load:24,plannedArrival:iso(1)+'T11:00',actualArrival:'',status:'Planned'}
  ]};
 // Synthetic prospect-specific scenarios. These are illustrative fictional records, not customer data.
+// Fictional industry scenarios for discovery. No company records or proprietary algorithms.
 const profileParam=new URLSearchParams(window.location.search).get('profile');
-const profile=['nd','united','raubex'].includes(profileParam)?profileParam:null;
-const profileLabels={nd:'Fabrication workshop illustration',united:'Distribution dispatch illustration',raubex:'Road surfacing production illustration'};
+const profile=['national','npc','raubex'].includes(profileParam)?profileParam:null;
+const profileLabels={national:'Asphalt operations illustration',npc:'Concrete and aggregates illustration',raubex:'Roadworks and project reporting illustration'};
 const scenarios={
-nd:{maintenance:[
-{id:'FAB-401',asset:'Workshop overhead hoist',due:iso(6),runningHours:960,serviceAtHours:1000,criticality:3,status:'Open'},
-{id:'FAB-402',asset:'Fabrication compressor',due:iso(-1),runningHours:1080,serviceAtHours:1050,criticality:2,status:'Open'},
-{id:'FAB-403',asset:'Welding bay power unit',due:iso(15),runningHours:380,serviceAtHours:500,criticality:2,status:'In progress'}
+national:{
+production:[
+{id:'ASP-101',date:iso(-2),shift:'Asphalt morning',planned:220,actual:211,rejected:4,dispatched:199},
+{id:'ASP-102',date:iso(-1),shift:'Asphalt afternoon',planned:190,actual:197,rejected:3,dispatched:185},
+{id:'ASP-103',date:iso(0),shift:'Asphalt morning',planned:215,actual:205,rejected:5,dispatched:194}
+],
+maintenance:[
+{id:'ASP-M01',asset:'Sample conveyor drive',due:iso(3),runningHours:965,serviceAtHours:1000,criticality:2,status:'Open'},
+{id:'ASP-M02',asset:'Sample loading equipment',due:iso(-1),runningHours:1055,serviceAtHours:1050,criticality:2,status:'In progress'}
 ]},
-united:{fleet:[
-{id:'DIST-501',vehicle:'FLEET-12',route:'Keystone depot → Retail DC',capacity:24,load:20,plannedArrival:iso(-1)+'T11:00',actualArrival:iso(-1)+'T10:45',status:'Delivered'},
-{id:'DIST-502',vehicle:'FLEET-18',route:'Port → Warehouse',capacity:28,load:25,plannedArrival:iso(-1)+'T15:00',actualArrival:iso(-1)+'T16:40',status:'Delivered'},
-{id:'DIST-503',vehicle:'FLEET-08',route:'Warehouse → Distribution hub',capacity:20,load:18,plannedArrival:iso(1)+'T13:00',actualArrival:'',status:'In transit'}
+npc:{
+production:[
+{id:'CON-201',date:iso(-2),shift:'Concrete batch AM',planned:145,actual:139,rejected:2,dispatched:130},
+{id:'CON-202',date:iso(-1),shift:'Aggregate dispatch',planned:165,actual:158,rejected:1,dispatched:152},
+{id:'CON-203',date:iso(0),shift:'Concrete batch PM',planned:135,actual:140,rejected:3,dispatched:133}
+],
+fleet:[
+{id:'CON-T01',vehicle:'TRUCK-EX1',route:'Batch plant → Example site',capacity:18,load:16,plannedArrival:iso(-1)+'T10:00',actualArrival:iso(-1)+'T09:50',status:'Delivered'},
+{id:'CON-T02',vehicle:'TRUCK-EX2',route:'Quarry → Stockyard',capacity:25,load:23,plannedArrival:iso(-1)+'T14:30',actualArrival:iso(-1)+'T15:15',status:'Delivered'}
 ]},
-raubex:{production:[
+raubex:{
+production:[
 {id:'ROAD-601',date:iso(-2),shift:'Roadworks early',planned:180,actual:170,rejected:5,dispatched:162},
 {id:'ROAD-602',date:iso(-1),shift:'Surfacing late',planned:145,actual:151,rejected:3,dispatched:140},
 {id:'ROAD-603',date:iso(0),shift:'Rehabilitation early',planned:165,actual:160,rejected:4,dispatched:154}
+],
+maintenance:[
+{id:'ROAD-M01',asset:'Example milling unit',due:iso(5),runningHours:975,serviceAtHours:1000,criticality:3,status:'Open'},
+{id:'ROAD-M02',asset:'Example service vehicle',due:iso(-2),runningHours:1100,serviceAtHours:1050,criticality:2,status:'In progress'}
 ]}}
 ;
 const configs={
